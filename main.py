@@ -183,6 +183,8 @@ def main():
     console.print(Panel(f"[bold]CodeLearn[/bold]\nAnalyzing: {directory}", 
                        border_style="cyan"))
 
+    explain_only = '--explain-only' in sys.argv
+    explain_only = '--explain-only' in sys.argv
     code = collect_files(directory)
     
     if not code.strip():
@@ -198,9 +200,11 @@ def main():
         border_style="cyan"
     ))
 
-    if questions:
+    if questions and not explain_only:
         input("\n[Press Enter when you're ready for the quiz]")
         run_quiz(questions, code)
+    elif explain_only:
+        console.print("\n[bold cyan]Explain-only mode — skipping quiz.[/bold cyan]")
     else:
         console.print("[yellow]No quiz questions were generated.[/yellow]")
 
